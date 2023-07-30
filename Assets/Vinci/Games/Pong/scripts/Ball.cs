@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -12,6 +13,9 @@ public class Ball : MonoBehaviour
     public Vector3 direction;
 
     public bool hitWat = false;
+
+    public event Action hitTopWall;
+    public event Action hitBottomWall;
 
     private void Awake()
     {
@@ -28,6 +32,7 @@ public class Ball : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         rb.position = Vector2.zero;
+        currentSpeed = baseSpeed;
     }
 
     public void AddStartingForce(bool startBottom)
@@ -37,8 +42,8 @@ public class Ball : MonoBehaviour
 
         // Flip a coin to determine if the ball goes up or down. Set the range
         // between 0.5 -> 1.0 to ensure it does not move completely horizontal.
-        float x = Random.value < 0.5f ? Random.Range(-1f, -0.5f)
-                                      : Random.Range(0.5f, 1f);
+        float x = UnityEngine.Random.value < 0.5f ? UnityEngine.Random.Range(-1f, -0.5f)
+                                      : UnityEngine.Random.Range(0.5f, 1f);
 
         // Apply the initial force and set the current speed
         direction = new Vector3(x, 0, z).normalized;
@@ -60,6 +65,14 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("hit wall");
             direction.x = -direction.x;
+        }
+        else if(other.CompareTag("TopWall"))
+        {
+            hitTopWall?.Invoke();
+        }
+        else if(other.CompareTag("BottomWall"))
+        {
+            hitBottomWall?.Invoke();
         }
     }
 }

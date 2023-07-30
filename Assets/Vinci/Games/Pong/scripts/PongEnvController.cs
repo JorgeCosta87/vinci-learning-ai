@@ -2,8 +2,81 @@ using TMPro;
 using UnityEngine;
 
 public class PongEnvController : MonoBehaviour
-{
-	/*
+{	
+	[SerializeField]
+    private Paddle _playerPaddle;
+    [SerializeField]
+    private Paddle _aiPaddle;
+
+    [SerializeField]
+    private Ball _ball;
+
+	[SerializeField]
+	private int maxScore = 2;
+
+    private int _playerScore;
+    private int _aiScore;
+
+
+	void Awake()
+	{
+        _ball.hitBottomWall += AiScores;
+        _ball.hitTopWall += PlayerScores;
+    }
+
+	public void OnEpisodStart()
+	{
+		 ResetEnv();
+        _ball.AddStartingForce(true);
+    }
+
+	public void ResetEnv()
+	{
+        _playerPaddle.ResetPosition();
+        _aiPaddle.ResetPosition();
+        _ball.ResetPosition();
+    }
+
+	public bool CheckGameOver()
+	{
+		if(_playerScore == maxScore)
+		{
+            Debug.Log("Player Wins");
+            _playerPaddle.AddReward(1f);
+			_playerPaddle.EndEpisode();
+            return true;
+        }
+		else if(_aiScore == maxScore)
+		{
+            Debug.Log("AI Wins");
+            _playerPaddle.AddReward(-1f);
+			_playerPaddle.EndEpisode();
+            return true;
+        }
+        return false;
+    }
+
+	void PlayerScores()
+	{
+        _playerScore++;
+	   	bool isGameover = CheckGameOver();
+	   	if(!isGameover)
+	   	{
+            ResetEnv();
+		}
+    }
+
+	void AiScores()
+	{
+        _aiScore++;
+       bool isGameover = CheckGameOver();
+	   if(!isGameover)
+	   {
+            ResetEnv();
+        }
+    }
+
+    /*
 	[SerializeField]
 	Ball ball;
 

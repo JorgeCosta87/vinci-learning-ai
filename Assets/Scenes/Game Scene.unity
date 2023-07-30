@@ -309,7 +309,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.0049839607, g: 0.1303154, b: 0.3773585, a: 0}
+  m_BackGroundColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5393,7 +5393,7 @@ GameObject:
   - component: {fileID: 2738696600153258605}
   - component: {fileID: 2738696600153258604}
   m_Layer: 0
-  m_Name: BottomPaddle
+  m_Name: PlayerPaddle
   m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10564,9 +10564,11 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 5000
   minDirection: 0.05
   speed: 8
+  speedIncreaseFactor: 1.5
+  speedIncreaseCounter: 0
   useDynamicBounce: 0
 --- !u!114 &2738696600153258605
 MonoBehaviour:
@@ -10584,18 +10586,18 @@ MonoBehaviour:
     VectorObservationSize: 1
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 0
-      BranchSizes: 01000000
-    VectorActionSize: 01000000
+      m_NumContinuousActions: 2
+      BranchSizes: 
+    VectorActionSize: 02000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 0
+    VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorType: 1
+  m_BehaviorName: pongAi
   TeamId: 0
-  m_UseChildSensors: 1
+  m_UseChildSensors: 0
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
@@ -11121,7 +11123,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7802465985711812060}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11129,7 +11131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.94, y: -0.5}
+  m_AnchoredPosition: {x: -16, y: 0}
   m_SizeDelta: {x: 20, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &5306153103279228168
@@ -16236,8 +16238,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 10, z: 0.3933792}
-  m_Center: {x: 0, y: 4.945057, z: -0.3033104}
+  m_Size: {x: 1, y: 10, z: 0.6380911}
+  m_Center: {x: 0, y: 4.945057, z: -0.18095446}
 --- !u!1 &5925896600157520454
 GameObject:
   m_ObjectHideFlags: 0
@@ -16589,8 +16591,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278255409
+  m_fontColor: {r: 0.19214141, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16607,8 +16609,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16686,12 +16688,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 10, z: 0.22149181}
-  m_Center: {x: 0, y: 4.3144608, z: 0.3892541}
+  m_Size: {x: 1, y: 10.173001, z: 0.6631918}
+  m_Center: {x: 0, y: 4.40096, z: 0.1684041}
 --- !u!1 &6430894517706497369
 GameObject:
   m_ObjectHideFlags: 0
@@ -16706,7 +16708,7 @@ GameObject:
   - component: {fileID: 6430894517706497368}
   m_Layer: 0
   m_Name: Arena Boundary Top
-  m_TagString: Untagged
+  m_TagString: TopWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16845,8 +16847,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.0969188}
-  m_Center: {x: 0, y: 0, z: 0.0023871423}
+  m_Size: {x: 1, y: 1.9777502, z: 1.2001143}
+  m_Center: {x: 0, y: 0.4888751, z: 0.0017099619}
 --- !u!33 &6628105661904896827
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16889,8 +16891,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.1065964}
-  m_Center: {x: 0, y: 0, z: 0.00096673967}
+  m_Size: {x: 1, y: 1.9572716, z: 1.194887}
+  m_Center: {x: 0, y: 0.4786359, z: -0.0002704382}
 --- !u!23 &6742768082305328341
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16982,6 +16984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6753299294678221567}
+  - component: {fileID: 7027372037750170175}
   m_Layer: 0
   m_Name: PongEnv (1)
   m_TagString: Untagged
@@ -16989,6 +16992,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7027372037750170175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027372037750170174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aef0cc792c9ad045b0ebec27a799b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPaddle: {fileID: 2738696600153258604}
+  _aiPaddle: {fileID: 7319334756839130775}
+  _ball: {fileID: 7763440640301848958}
+  maxScore: 2
 --- !u!4 &7045469648091449675
 Transform:
   m_ObjectHideFlags: 0
@@ -17104,7 +17123,9 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   minDirection: 0.05
-  speed: 5
+  speed: 7
+  speedIncreaseFactor: 1.1
+  speedIncreaseCounter: 0
   useDynamicBounce: 0
   ball: {fileID: 6600072297513182035}
 --- !u!114 &7319334756839130776
@@ -17131,10 +17152,10 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: My Behavior
   TeamId: 0
-  m_UseChildSensors: 1
+  m_UseChildSensors: 0
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
@@ -17168,7 +17189,7 @@ GameObject:
   - component: {fileID: 5867466502675135463}
   m_Layer: 0
   m_Name: Arena Boundary Bottom
-  m_TagString: Untagged
+  m_TagString: BottomWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17505,7 +17526,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4341963832067627918}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17513,7 +17534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.18, y: -0.5}
+  m_AnchoredPosition: {x: 16, y: 0}
   m_SizeDelta: {x: 20, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8663097059396233039
@@ -17545,8 +17566,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294910911
+  m_fontColor: {r: 0.7478069, g: 0.135849, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -17563,8 +17584,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

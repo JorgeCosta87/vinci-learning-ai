@@ -6,6 +6,8 @@ public class BasicAiPaddle : Paddle
     private Rigidbody ball;
     private Vector3 startPos;
 
+    private float centerTolerance = 0.1f;
+
     void Start()
     {
         startPos = transform.position;
@@ -32,6 +34,11 @@ public class BasicAiPaddle : Paddle
         }
         else
         {
+            if(rigidbody.position.x - startPos.x < centerTolerance)
+            {
+                return;
+            }
+
             if (rigidbody.position.x > 0f) 
             {
                 rigidbody.AddForce(Vector2.left * speed);
@@ -40,6 +47,7 @@ public class BasicAiPaddle : Paddle
             {
                 rigidbody.AddForce(Vector2.right * speed);
             }
+
         }
     }
 }

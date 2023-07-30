@@ -10,6 +10,9 @@ public abstract class Paddle : Agent
 
     public float speed = 8f;
 
+    public float speedIncreaseFactor = 1.1f;
+    public int speedIncreaseCounter = 0;
+
     [Tooltip("Changes how the ball bounces off the paddle depending on where it hits the paddle. The further from the center of the paddle, the steeper the bounce angle.")]
     public bool useDynamicBounce = false;
 
@@ -22,8 +25,8 @@ public abstract class Paddle : Agent
 
     public void ResetPosition()
     {
-        rigidbody.velocity = Vector2.zero;
-        rigidbody.position = new Vector2(rigidbody.position.x, 0f);
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.position = new Vector3(0f, rigidbody.position.y, rigidbody.position.z);
     }
 
 
@@ -37,6 +40,7 @@ public abstract class Paddle : Agent
             newDir.z = Mathf.Sign(newDir.z) * Mathf.Max(Mathf.Abs(newDir.z), this.minDirection);
 
             other.gameObject.GetComponent<Ball>().direction = newDir;
+            other.gameObject.GetComponent<Ball>().currentSpeed *= speedIncreaseFactor;
         }
     }
 
