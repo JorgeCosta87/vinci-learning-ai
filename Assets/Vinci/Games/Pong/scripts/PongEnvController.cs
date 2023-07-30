@@ -17,8 +17,12 @@ public class PongEnvController : MonoBehaviour
     private int _playerScore;
     private int _aiScore;
 
+    public TextMeshPro textTop;
+    public TextMeshPro textBottom;
+    public TextMeshPro countdown;
 
-	void Awake()
+
+    void Awake()
 	{
         _ball.hitBottomWall += AiScores;
         _ball.hitTopWall += PlayerScores;
@@ -59,7 +63,9 @@ public class PongEnvController : MonoBehaviour
 	void PlayerScores()
 	{
         _playerScore++;
-	   	bool isGameover = CheckGameOver();
+
+        textBottom.text = _playerScore.ToString();
+        bool isGameover = CheckGameOver();
 	   	if(!isGameover)
 	   	{
             ResetEnv();
@@ -69,6 +75,8 @@ public class PongEnvController : MonoBehaviour
 	void AiScores()
 	{
         _aiScore++;
+        textTop.text = _aiScore.ToString();
+
        bool isGameover = CheckGameOver();
 	   if(!isGameover)
 	   {
