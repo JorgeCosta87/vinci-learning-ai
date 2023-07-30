@@ -5593,6 +5593,7 @@ GameObject:
   - component: {fileID: 2738696600153258603}
   - component: {fileID: 2738696600153258605}
   - component: {fileID: 2738696600153258604}
+  - component: {fileID: 2738696600153258606}
   m_Layer: 0
   m_Name: PlayerPaddle
   m_TagString: Paddle
@@ -10771,6 +10772,7 @@ MonoBehaviour:
   speedIncreaseFactor: 1.1
   speedIncreaseCounter: 0
   useDynamicBounce: 0
+  ball: {fileID: 6634527602474931928}
 --- !u!114 &2738696600153258605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10787,9 +10789,9 @@ MonoBehaviour:
     VectorObservationSize: 1
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 2
+      m_NumContinuousActions: 1
       BranchSizes: 
-    VectorActionSize: 02000000
+    VectorActionSize: 01000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -10802,6 +10804,20 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
+--- !u!114 &2738696600153258606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274322625097694907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 1
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &2738696600937211868
 GameObject:
   m_ObjectHideFlags: 0
@@ -11229,7 +11245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GET READY
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16291,7 +16307,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5e236278090ae840a68934b11273878, type: 2}
+  - {fileID: 2100000, guid: 80b4445a9f1f6495a849e65791934b2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

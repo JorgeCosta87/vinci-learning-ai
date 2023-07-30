@@ -1,10 +1,11 @@
 using TMPro;
+using Unity.MLAgents;
 using UnityEngine;
 
 public class PongEnvController : MonoBehaviour
 {	
 	[SerializeField]
-    private Paddle _playerPaddle;
+    private AgentPaddle _playerPaddle;
     [SerializeField]
     private Paddle _aiPaddle;
 
@@ -26,11 +27,15 @@ public class PongEnvController : MonoBehaviour
 	{
         _ball.hitBottomWall += AiScores;
         _ball.hitTopWall += PlayerScores;
+        _playerPaddle.episodeBegin += OnEpisodStart;
     }
 
 	public void OnEpisodStart()
 	{
-		 ResetEnv();
+		ResetEnv();
+        _playerScore = 0;
+        _aiScore = 0;
+        countdown.text = "";
         _ball.AddStartingForce(true);
     }
 
@@ -45,14 +50,14 @@ public class PongEnvController : MonoBehaviour
 	{
 		if(_playerScore == maxScore)
 		{
-            Debug.Log("Player Wins");
+            countdown.text = "Player Wins";
             _playerPaddle.AddReward(1f);
 			_playerPaddle.EndEpisode();
             return true;
         }
 		else if(_aiScore == maxScore)
 		{
-            Debug.Log("AI Wins");
+            countdown.text = "AI Wins";
             _playerPaddle.AddReward(-1f);
 			_playerPaddle.EndEpisode();
             return true;
